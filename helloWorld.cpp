@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <stdbool.h>
 #include <list>
 #include <cstdlib>
 
@@ -23,7 +22,7 @@ int calculSum(int n)
 
 void updateList(std::list<lettreCompte>& list, char lettre) {
     for (auto& l : list) {
-        if (l.getLettre() == std::string(1, lettre)) {
+        if (l.getLettre()[0] == lettre) {
             l.ajouteLettre();
             return;
         }
@@ -37,12 +36,14 @@ int ex1()
     
     std::cout << "Type your age: ";
     std::cin >> age;
-    
+    std::cin.ignore();
+
     std::cout << "Type your name: ";
-    std::cin >> name;
+    std::getline(std::cin, name);
+    // std::cin.ignore();
     
     std::string str = sayHello(name, age);
-    std::cout << str << std::endl;
+    std::cout << str << "\n";
     return EXIT_SUCCESS;
 }
 
@@ -58,13 +59,13 @@ int ex2(){
     std::cin >> valeur2;
     operations op = operations(valeur1, valeur2);
 
-    std::cout << "The sum of the 2 value is : " << op.sum() << std::endl;
-    std::cout << "The prod of the 2 value is : " << op.prod() << std::endl;
-    std::cout << "The diff of the 2 value is : " << op.diff() << std::endl;
-    std::cout << "The divide of the 2 value is : " << op.divide() << std::endl;
+    std::cout << "The sum of the 2 value is : " << op.sum() << "\n";
+    std::cout << "The prod of the 2 value is : " << op.prod() << "\n";
+    std::cout << "The diff of the 2 value is : " << op.diff() << "\n";
+    std::cout << "The divide of the 2 value is : " << op.divide() << "\n";
 
-    std:: cout << "The first value is : " << op.getV1() << std::endl;
-    std:: cout << "The second value is : " << op.getV2() << std::endl;
+    std:: cout << "The first value is : " << op.getV1() << "\n";
+    std:: cout << "The second value is : " << op.getV2() << "\n";
     return EXIT_SUCCESS;
 }
 
@@ -75,7 +76,7 @@ int ex3(){
     std::cin >> valeur1;
 
     bool isOdd = valeur1 % 2 == 0 ? false : true;
-    std::cout << "The value is " << (isOdd ? "odd" : "even") << std::endl;
+    std::cout << "The value is " << (isOdd ? "odd" : "even") << "\n";
     return EXIT_SUCCESS;
 }
 
@@ -86,7 +87,7 @@ int ex4(){
     std::cin >> n;
 
     int sum = calculSum(n);
-    std::cout << "The sum of the first " << n << " numbers is : " << sum << std::endl;
+    std::cout << "The sum of the first " << n << " numbers is : " << sum << "\n";
     return EXIT_SUCCESS;
 }
     
@@ -95,22 +96,16 @@ int ex5() {
     std::string str;
 
     std::cout << "Please enter a string: ";
-    
-    if (!std::getline(std::cin, str)){
-        return EXIT_FAILURE;
-    }
-    if (str.empty()){
-        std::getline(std::cin, str);
-    }
-    std::cout << "You entered: " << str << std::endl;
+    std::getline(std::cin >> std::ws, str);
+    std::cout << "You entered: " << str << "\n";
 
     for (char lettre : str) {
         updateList(vowels, lettre);
     }
-    std::cout << std::endl;
+    std::cout << "\n";
 
     for (const auto& l : vowels) {
-        std::cout << "The letter " << l.getLettre() << " appears " << l.getCompte() << " times" << std::endl;
+        std::cout << "The letter " << l.getLettre() << " appears " << l.getCompte() << " times" << "\n";
     }
     return EXIT_SUCCESS;
 }
@@ -124,9 +119,9 @@ int ex6(){
         for (int c = 1; c <= n; c++){
             std::cout << "*";
         }
-        std::cout << std::endl;
+        std::cout << "\n";
     }
-    std::cout << std::endl;
+    std::cout << "\n";
 
     return EXIT_SUCCESS;
 }
@@ -142,13 +137,13 @@ int ex7(){
         std::cin >> currentValue;
 
         if (currentValue > randomValue){
-            std::cout << "Your value is too high" << std::endl;
+            std::cout << "Your value is too high\n";
         }
         else if (currentValue < randomValue){
-            std::cout << "Your value is too low" << std::endl;
+            std::cout << "Your value is too low\n";
         }
         else {
-            std::cout << currentValue << " was the correct value" << std::endl;
+            std::cout << currentValue << " was the correct value\n" ;
         }
     }
 
@@ -157,20 +152,21 @@ int ex7(){
 
 int main()
 {
+    srand(time(0));
     int isSucces = 0;
-    std::cout << "ex 1 : " << std::endl;
+    std::cout << "ex 1 : " << "\n";
     isSucces = ex1() + isSucces;
-    std::cout << "ex 2 : " << std::endl;
+    std::cout << "ex 2 : " << "\n";
     isSucces = ex2() + isSucces;
-    std::cout << "ex 3 : " << std::endl;
+    std::cout << "ex 3 : " << "\n";
     isSucces = ex3() + isSucces;
-    std::cout << "ex 4 : " << std::endl;
+    std::cout << "ex 4 : " << "\n";
     isSucces = ex4() + isSucces;
-    std::cout << "ex 5 : " << std::endl;
+    std::cout << "ex 5 : " << "\n";
     isSucces = ex5() + isSucces;
-    std::cout << "ex 6 : " << std::endl;
+    std::cout << "ex 6 : " << "\n";
     isSucces = ex6() + isSucces;
-    std::cout << "ex 7 : " << std::endl;
+    std::cout << "ex 7 : " << "\n";
     isSucces = ex7() + isSucces;
 
     return isSucces > 0 ? EXIT_FAILURE : EXIT_SUCCESS;

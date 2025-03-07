@@ -1,6 +1,6 @@
 ++ = g++ -std=c++11 -Wall -Wextra
 OUT = out
-FILE = helloWorld.c++
+FILE = helloWorld.cpp
 OUTFILE = helloWorld
 
 all: run
