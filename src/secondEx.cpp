@@ -13,6 +13,7 @@ std::string getCurrent(std::string Phrase, int positionDebut, int tailleMot){
 class Solution {
 public:
     static int ex1() {
+        // On cherche ici a compter le nombre de fois ou un mot se trouve dans une phrase
         std::string Phrase = "Ceci est un test. Ce test est simple." ;
         std::string Mot = "test";
         int tailleMot = Mot.length();
@@ -20,7 +21,7 @@ public:
 
         int compteur = 0;
 
-        for (int i = 0; i < Phrase.length() - tailleMot + 1; i++){
+        for (unsigned long i = 0; i <= Phrase.length() - tailleMot; i++){
             std::string currentString = getCurrent(Phrase, i, tailleMot);
             if (currentString == Mot){
                 compteur++;
@@ -28,27 +29,73 @@ public:
         }
 
         if (Resultat == compteur){
-            std::cout << "Tout est bon par ici";
+            std::cout << "Tout est bon par ici\n";
         }
 
         return Resultat == compteur ? EXIT_SUCCESS : EXIT_FAILURE; 
     }
+
     static int ex2() { 
-    std::cout << "TODO\n"; 
+        /*
+        Crée un programme qui :
+            Demande un nombre n à l'utilisateur.
+            Alloue dynamiquement un tableau de n entiers.
+            Demande à l'utilisateur de remplir les n valeurs.
+            Affiche la somme et la moyenne des valeurs.
+            Libère la mémoire à la fin. 
+        */
+        std::cout << "TODO\n"; 
+        int tailleTableau = 0;
+        std::cout << "Quelle est la taille du tableau : ";
+        std::cin >> tailleTableau;
+
+        int* tableau = new int[tailleTableau];
+        int valeurUtilisateur;
+        float moyenne = 0;
+        int somme = 0;
+        
+        for (int i=0; i < tailleTableau; i++){
+            std::cout << "Quelle est la valeur du tableau en position " << i << " : ";
+            std::cin >> valeurUtilisateur;
+            tableau[i] = valeurUtilisateur;
+            somme += valeurUtilisateur;
+        }
+
+        for (int i=0; i < tailleTableau; i++){
+            std::cout << (i == 0 ? "[" : " ") << tableau[i] << (i == tailleTableau - 1 ? "]\n" :",");
+        }
+
+        std::cout << "La somme  : " << somme << "\n";
+        moyenne = (float)somme / (float)tailleTableau;
+        std::cout << "La moyenne  : " << moyenne << "\n";
+
+        delete [] tableau;
+
         return EXIT_SUCCESS; 
     }
+
     static int ex3() { 
+        /*
+        Crée une classe CompteBancaire avec :
+            Un attribut solde
+            Une méthode deposer(double montant)
+            Une méthode retirer(double montant) (refuse si solde insuffisant)
+            Une méthode afficherSolde()
+        */
         std::cout << "TODO\n"; 
         return EXIT_SUCCESS; 
     }
+
     static int ex4() { 
         std::cout << "TODO\n"; 
         return EXIT_SUCCESS; 
     }
+
     static int ex5() { 
         std::cout << "TODO\n"; 
         return EXIT_SUCCESS; 
     }
+
     static int ex6() { 
         std::cout << "TODO\n"; 
         return EXIT_SUCCESS; 
