@@ -2,45 +2,69 @@
 #include <vector>
 #include <functional>
 
+std::string getCurrent(std::string Phrase, int positionDebut, int tailleMot){
+    std::string output = "";
+    for (int i =0; i < tailleMot; i++){
+        output += Phrase[positionDebut+i];
+    }
+    return output;
+}
+
 class Solution {
 public:
-    int ex1() {
-        std::cout << "TODO\n"; 
-        return 0; 
+    static int ex1() {
+        std::string Phrase = "Ceci est un test. Ce test est simple." ;
+        std::string Mot = "test";
+        int tailleMot = Mot.length();
+        int Resultat = 2;
+
+        int compteur = 0;
+
+        for (int i = 0; i < Phrase.length() - tailleMot + 1; i++){
+            std::string currentString = getCurrent(Phrase, i, tailleMot);
+            if (currentString == Mot){
+                compteur++;
+            }
+        }
+
+        if (Resultat == compteur){
+            std::cout << "Tout est bon par ici";
+        }
+
+        return Resultat == compteur ? EXIT_SUCCESS : EXIT_FAILURE; 
     }
-    int ex2() { 
-        std::cout << "TODO\n"; 
-        return 0; 
+    static int ex2() { 
+    std::cout << "TODO\n"; 
+        return EXIT_SUCCESS; 
     }
-    int ex3() { 
+    static int ex3() { 
         std::cout << "TODO\n"; 
-        return 0; 
+        return EXIT_SUCCESS; 
     }
-    int ex4() { 
+    static int ex4() { 
         std::cout << "TODO\n"; 
-        return 0; 
+        return EXIT_SUCCESS; 
     }
-    int ex5() { 
+    static int ex5() { 
         std::cout << "TODO\n"; 
-        return 0; 
+        return EXIT_SUCCESS; 
     }
-    int ex6() { 
+    static int ex6() { 
         std::cout << "TODO\n"; 
-        return 0; 
+        return EXIT_SUCCESS; 
     }
 };
 
 int main() {
-    Solution solution;
     int isSuccess = 0;
 
     std::vector<std::function<int()>> functions = {
-        {std::bind(&Solution::ex1, &solution)},
-        {std::bind(&Solution::ex2, &solution)},
-        {std::bind(&Solution::ex3, &solution)},
-        {std::bind(&Solution::ex4, &solution)},
-        {std::bind(&Solution::ex5, &solution)},
-        {std::bind(&Solution::ex6, &solution)}
+        {std::bind(&Solution::ex1)},
+        {std::bind(&Solution::ex2)},
+        {std::bind(&Solution::ex3)},
+        {std::bind(&Solution::ex4)},
+        {std::bind(&Solution::ex5)},
+        {std::bind(&Solution::ex6)}
     };
 
     int count = 1;
