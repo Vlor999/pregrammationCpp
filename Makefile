@@ -1,6 +1,6 @@
 # Compiler et options
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra -Iinclude
+CXXFLAGS = -std=c++11 -Wall -Wextra -Iinclude 
 
 # Dossiers
 OUT = out
