@@ -40,7 +40,6 @@ int ex1()
 
     std::cout << "Type your name: ";
     std::getline(std::cin, name);
-    // std::cin.ignore();
     
     std::string str = sayHello(name, age);
     std::cout << str << "\n";
