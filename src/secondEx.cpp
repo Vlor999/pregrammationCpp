@@ -2,12 +2,10 @@
 #include <vector>
 #include <functional>
 
-std::string getCurrent(std::string Phrase, int positionDebut, int tailleMot){
-    std::string output = "";
-    for (int i =0; i < tailleMot; i++){
-        output += Phrase[positionDebut+i];
-    }
-    return output;
+#include "classEx3.hpp"
+
+std::string getCurrent(std::string Phrase, int positionDebut, int tailleMot) {
+    return Phrase.substr(positionDebut, tailleMot);
 }
 
 class Solution {
@@ -44,12 +42,11 @@ public:
             Affiche la somme et la moyenne des valeurs.
             Libère la mémoire à la fin. 
         */
-        std::cout << "TODO\n"; 
         int tailleTableau = 0;
         std::cout << "Quelle est la taille du tableau : ";
         std::cin >> tailleTableau;
 
-        int* tableau = new int[tailleTableau];
+        std::vector<int> tableau(tailleTableau);
         int valeurUtilisateur;
         float moyenne = 0;
         int somme = 0;
@@ -69,8 +66,6 @@ public:
         moyenne = (float)somme / (float)tailleTableau;
         std::cout << "La moyenne  : " << moyenne << "\n";
 
-        delete [] tableau;
-
         return EXIT_SUCCESS; 
     }
 
@@ -82,22 +77,86 @@ public:
             Une méthode retirer(double montant) (refuse si solde insuffisant)
             Une méthode afficherSolde()
         */
-        std::cout << "TODO\n"; 
+        CompteBancaire compte = CompteBancaire();
+        compte.afficherSolde();
+        compte.retirer(50);
+        compte.deposer(100);
+        compte.afficherSolde();
+        compte.retirer(10);
+        compte.afficherSolde();
+        compte.retirer(-10);
+        compte.afficherSolde();
         return EXIT_SUCCESS; 
     }
 
+    static bool comp(Livre l1, Livre l2){
+        int annee1 = l1.getAnnee();
+        int annee2 = l2.getAnnee();
+        return annee1 < annee2;
+    };
+    
+    static void afficheLivre(std::vector<Livre> listLivre){
+        sort(listLivre.begin(), listLivre.end(), comp);
+        for (Livre l :listLivre){
+            l.show();
+        }
+    };
+
     static int ex4() { 
-        std::cout << "TODO\n"; 
+        /*
+        Crée une classe Livre avec :
+            titre (string)
+            auteur (string)
+            annee (int)
+            Stocke plusieurs Livre dans un std::vector et ajoute une fonction pour afficher les livres triés par année.*/
+        Livre livre1 = Livre("Les fleurs du mal", "Baudelaire", 1786);
+        Livre livre2 = Livre("Alcool", "Voltaire", 1986);
+        Livre livre3 = Livre("Les pleurs de l'homme", "willem", 2025);
+        std::vector<Livre> listLivre = {livre1, livre2, livre3};
+        afficheLivre(listLivre);
         return EXIT_SUCCESS; 
     }
 
     static int ex5() { 
-        std::cout << "TODO\n"; 
+        /*
+        Stocke plusieurs Personne dans un std::vector.
+        Trie la liste par âge en utilisant std::sort avec une fonction lambda.*/
+        std::vector<Personne> listPersonne = {Personne("Papi", 85), Personne("willem", 22), Personne("chloe", 24)};
+
+        /*
+        Lambda format : [list of eleemnt ot use](args){function}*/
+        sort(listPersonne.begin(), listPersonne.end(), [](const Personne& p1,const Personne& p2){return p1.age < p2.age;});
+        for (Personne p : listPersonne){
+            p.show();
+        }
+
         return EXIT_SUCCESS; 
     }
 
     static int ex6() { 
-        std::cout << "TODO\n"; 
+        srand(time(0));
+        int valeur = rand() % 101;
+        int nombreEssai = 10;
+        bool isSuccess = false;
+        int currentValue;
+
+        while(nombreEssai > 0 && !isSuccess){
+            std::cout << "Quelle est votre valeur : ";
+            std::cin >> currentValue;
+            isSuccess = currentValue == valeur;
+            if (!isSuccess){
+                std::cout << "Vous êtes " << (std::abs(currentValue - valeur) > 10 ? "tres " : "") << (currentValue > valeur ? "au dessus" : "en dessous") << "\n";
+            }
+            else{
+                std::cout << "Bravo la valeu etait  : " << valeur << std::endl;
+            }
+            nombreEssai--;
+        }
+
+        if(!isSuccess){
+            std::cout << "Trop d'essaie, valeur etait : " << valeur << std::endl;
+        }
+
         return EXIT_SUCCESS; 
     }
 };
